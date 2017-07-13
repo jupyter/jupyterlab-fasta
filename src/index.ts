@@ -31,9 +31,32 @@ class RenderedFasta extends Widget implements IRenderMime.IRenderer {
     super();
     this._mimeType = options.mimeType;
     this.addClass('jp-msa');
+    let msaDiv = document.createElement('div');
     this.msa = new msa.msa({
-      el: this.node,
+      el: msaDiv,
+      vis: {
+        sequences: true,
+        markers: true,
+        metacell: false,
+        conserv: false,
+        overviewbox: true,
+        seqlogo: false,
+        gapHeader: false,
+        leftHeader: true,
+      }
     });
+
+    // The menu doesn't work correctly in the absolutely positioned panel, so
+    // disabling it for now. This appears to be fixed in msa master, but the npm
+    // package hasn't been updated in a year. See
+    // https://github.com/wilzbach/msa/issues/226.
+    /*
+    this.menu = new msa.menu.defaultmenu({msa: this.msa});
+    this.msa.addView("menu", this.menu);
+    this.node.appendChild(this.menu.el);
+    */
+
+    this.node.appendChild(msaDiv);
   }
 
   /**
@@ -67,6 +90,7 @@ class RenderedFasta extends Widget implements IRenderMime.IRenderer {
   }
 
   msa: any;
+  menu: any;
   private _mimeType: string;
 }
 
