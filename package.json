@@ -1,0 +1,38 @@
+{
+  "name": "jupyterlab-fasta",
+  "version": "0.1.0",
+  "description": "A JupyterLab extension for rendering Fasta files.",
+  "main": "lib/index.js",
+  "keywords": [
+    "jupyter",
+    "jupyterlab"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "prepublish": "npm run build"
+  },
+  "jupyterlab": {
+    "mimeExtension": true
+  },
+  "dependencies": {
+    "@jupyterlab/rendermime-interfaces": "^0.2.1",
+    "@phosphor/widgets": "^1.5.0",
+    "msa": "^1.0.3"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "typescript": "~2.4.1"
+  },
+  "files": [
+    "style/*.css",
+    "lib/*.js",
+    "lib/*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jupyterlab/jupyterlab.git"
+  },
+  "author": "Project Jupyter",
+  "license": "BSD-3-Clause"
+}
