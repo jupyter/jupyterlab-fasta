@@ -8,6 +8,33 @@ for files with `.fasta` extensions and a mime renderer for the
 
 ![Screenshot](screenshot.png)
 
+To use the file viewer, right-click on a `.fasta` file and choose the `Fasta` viewer.
+
+To use the notebook viewer, you can define a Fasta display class like:
+
+```python
+from IPython.display import display
+class Fasta:
+    def __init__(self, data):
+        self.data = data
+    def _ipython_display_(self):
+        bundle = {
+            'application/vnd.fasta.fasta': self.data,
+            'text/plain': self.data
+        }
+        display(bundle, raw=True)
+```
+and then display `Fasta('some fasta data')`
+```python
+Fasta(""">SEQUENCE_1
+MTEITAAMVKELRESTGAGMMDCKNALSETNGDFDKAVQLLREKGLGKAAKKADRLAAEG
+LVSVKVSDDFTIAAMRPSYLSYEDLDMTFVENEYKALVAELEKENEERRRLKDPNKPEHK
+IPQFASRKQLSDAILKEAEEKIKEELKAQGKPEKIWDNIIPGKMNSFIADNSQLDSKLTL
+MGQFYVMDDKKTVEQVIAEKEKEFGGKIKIVEFICFEVGEGLEKKTEDFAAEVAAQL
+>SEQUENCE_2
+SATVSEINSETDFVAKNDQFIALTKDTTAHIQSNSLQSVEELHSSTINGVKFEEYLKSQI
+ATIGENLVVRRFATLKAGANGVVNGYIHTNGRVGVVIAAACDSAEVASKSRDLLRQICMH""")
+```
 ## Prerequisites
 
 * JupyterLab
