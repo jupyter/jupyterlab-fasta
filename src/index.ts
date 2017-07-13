@@ -66,8 +66,8 @@ class RenderedFasta extends Widget implements IRenderMime.IRenderer {
     let data = model.data[this._mimeType];
     var seqs =  msa.io.fasta.parse(data);
     this.msa.seqs.reset(seqs);
-    this._resetWidth();
     this.msa.render();
+    this._resetWidth();
     return Promise.resolve();
   }
 
