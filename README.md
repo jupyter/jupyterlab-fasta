@@ -6,6 +6,8 @@ for files with `.fasta` extensions and a mime renderer for the
 `application/vnd.fasta.fasta` mimetype is included. This extension uses the
 [MSA Fasta viewer](http://msa.biojs.net/).
 
+![Screenshot](screenshot.png)
+
 ## Prerequisites
 
 * JupyterLab
