@@ -17,19 +17,41 @@ import "msa/css/msa.css";
 
 import "../style/index.css";
 
-const FASTA_MIMETYPE = 'application/vnd.fasta.fasta';
+const TYPES: {[key: string]: {name: string, extensions: string[], reader: any}} = {
+  'application/vnd.fasta.fasta': {
+    name: 'Fasta',
+    extensions: ['.fasta', '.fa'],
+    reader: msa.io.fasta
+  },
+  'application/vnd.clustal.clustal': {
+    name: 'Clustal',
+    extensions: ['.clustal', '.aln'],
+    reader: msa.io.clustal
+  },
+  'application/vnd.newick.newick': {
+    name: 'Newick',
+    extensions: ['.nwk'],
+    reader: msa.io.newick
+  },
+  'application/vnd.gff.gff': {
+    name: 'GFF',
+    extensions: ['.gff'],
+    reader: msa.io.gff
+  }
+};
 
 /**
- * A widget for rendering Fasta data, for usage with rendermime.
+ * A widget for rendering data, for usage with rendermime.
  */
 export
-class RenderedFasta extends Widget implements IRenderMime.IRenderer {
+class RenderedData extends Widget implements IRenderMime.IRenderer {
   /**
    * Create a new widget for rendering Vega/Vega-Lite.
    */
   constructor(options: IRenderMime.IRendererOptions) {
     super();
     this._mimeType = options.mimeType;
+    this._parser = TYPES[this._mimeType].reader;
     this.addClass('jp-msa');
     let msaDiv = document.createElement('div');
     this.msa = new msa.msa({
@@ -60,11 +82,11 @@ class RenderedFasta extends Widget implements IRenderMime.IRenderer {
   }
 
   /**
-   * Render Fasta into this widget's node.
+   * Render into this widget's node.
    */
   renderModel(model: IRenderMime.IMimeModel): Promise<void> {
     let data = model.data[this._mimeType];
-    var seqs =  msa.io.fasta.parse(data);
+    var seqs =  this._parser.parse(data);
     this.msa.seqs.reset(seqs);
     this.msa.render();
     this._resetWidth();
@@ -92,32 +114,32 @@ class RenderedFasta extends Widget implements IRenderMime.IRenderer {
   msa: any;
   menu: any;
   private _mimeType: string;
+  private _parser: any;
 }
 
-
 /**
- * A mime renderer factory for Fasta data.
+ * A mime renderer factory for data.
  */
 export
 const rendererFactory: IRenderMime.IRendererFactory = {
   safe: false,
-  mimeTypes: [FASTA_MIMETYPE],
-  createRenderer: options => new RenderedFasta(options)
+  mimeTypes: Object.keys(TYPES),
+  createRenderer: options => new RenderedData(options)
 };
 
-const extensions: IRenderMime.IExtension | IRenderMime.IExtension[] = [
-  {
-    mimeType: FASTA_MIMETYPE,
+const extensions = Object.keys(TYPES).map(k => {
+  return {
+    mimeType: k,
     rendererFactory,
     rank: 0,
     dataType: 'string',
     documentWidgetFactoryOptions: {
-      name: 'Fasta',
-      fileExtensions: ['.fasta'],
-      defaultFor: ['.fasta'],
+      name: TYPES[k].name,
+      fileExtensions: TYPES[k].extensions,
+      defaultFor: TYPES[k].extensions,
       readOnly: true
     }
-  }
-];
+  } as IRenderMime.IExtension;
+});
 
 export default extensions;
