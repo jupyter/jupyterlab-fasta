@@ -128,16 +128,22 @@ const rendererFactory: IRenderMime.IRendererFactory = {
 };
 
 const extensions = Object.keys(TYPES).map(k => {
+  const name = TYPES[k].name;
   return {
-    mimeType: k,
+    name,
     rendererFactory,
     rank: 0,
     dataType: 'string',
+    fileTypes: [{
+      name,
+      extensions: TYPES[k].extensions,
+      mimeTypes: [k]
+    }],
     documentWidgetFactoryOptions: {
-      name: TYPES[k].name,
-      fileExtensions: TYPES[k].extensions,
-      defaultFor: TYPES[k].extensions,
-      readOnly: true
+      name,
+      primaryFileType: name,
+      fileTypes: [name],
+      defaultFor: [name],
     }
   } as IRenderMime.IExtension;
 });
