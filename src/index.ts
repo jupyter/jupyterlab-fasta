@@ -28,16 +28,6 @@ const TYPES: {[key: string]: {name: string, extensions: string[], reader: any}} 
     extensions: ['.clustal', '.aln'],
     reader: msa.io.clustal
   },
-  'application/vnd.newick.newick': {
-    name: 'Newick',
-    extensions: ['.nwk'],
-    reader: msa.io.newick
-  },
-  'application/vnd.gff.gff': {
-    name: 'GFF',
-    extensions: ['.gff'],
-    reader: msa.io.gff
-  }
 };
 
 /**
