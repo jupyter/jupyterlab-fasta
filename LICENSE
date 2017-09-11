@@ -25,3 +25,16 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+-------------------------------------------------------------------------------------------
+
+This package also includes sample data about Zika in the zika.fasta file. For more information, see the paper at (https://www.nature.com/nature/journal/v546/n7658/full/nature22402.html.
+
+@article{metsky2017zika,
+  title={Zika virus evolution and spread in the Americas},
+  author={Metsky, Hayden C and Matranga, Christian B and Wohl, Shirlee and Schaffner, Stephen F and Freije, Catherine A and Winnicki, Sarah M and West, Kendra and Qu, James and Baniecki, Mary Lynn and Gladden-Young, Adrianne and others},
+  journal={Nature},
+  year={2017},
+  publisher={Nature Research}
+}
