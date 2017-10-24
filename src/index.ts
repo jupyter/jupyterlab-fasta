@@ -120,7 +120,7 @@ const rendererFactory: IRenderMime.IRendererFactory = {
 const extensions = Object.keys(TYPES).map(k => {
   const name = TYPES[k].name;
   return {
-    name,
+    id: `jupyterlab-fasta:${name}`,
     rendererFactory,
     rank: 0,
     dataType: 'string',
