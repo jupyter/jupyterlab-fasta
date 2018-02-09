@@ -1,3 +1,5 @@
+# This repo is deprecated. The Fasta viewer has been moved to https://github.com/jupyterlab/jupyter-renderers
+
 # JupyterLab Fasta Viewer
 
 A JupyterLab extension for viewing
